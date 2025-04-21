@@ -15,8 +15,7 @@
 SimulatedMeasures simulatedMeasures;
 MqttConnection mqttConnection;
 
-
-void setup(void) {
+void init() {
     //Init M5 and serial port
     auto cfg = M5.config();
     M5.begin(cfg);
@@ -28,6 +27,11 @@ void setup(void) {
     LogsUtils::printLog("---Sistema iniciado---");
     //Wait after setup
     delay(5000);
+}
+
+void setup(void) {
+    //Init M5 and serial port
+    init();
 }
 
 void loop(void) {

@@ -3,5 +3,5 @@
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/ipch
-lib/config/.wifiConfig.h
-lib/config/.fiwatConfig.h
+include/config/.wifiConfig.h
+include/config/.fiwareConfig.h

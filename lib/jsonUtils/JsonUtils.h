@@ -7,20 +7,18 @@
 #define JSON_UTILS_H
 
 #include <ArduinoJson.h>
-#include <FS.h>
-#include <SPIFFS.h>
 
 class JsonUtils {
 public:
     // Constructor
     JsonUtils();
 
-    bool loadDefaultJson();
+    bool loadDefaultJson(String inputJsonAsString);
     bool setValue(const String& jsonPath, const String& newValue, const String& valueType);
     String getJsonAsString();
 
 private:
-    DynamicJsonDocument doc;
+    DynamicJsonDocument jsonDoc;
     bool parseAndSet(JsonVariant& target, const String& value, const String& type);
 };
 

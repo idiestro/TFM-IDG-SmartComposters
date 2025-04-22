@@ -4,21 +4,17 @@
 */
 
 #include "JsonUtils.h"
-#include "data_payloads/fiwareDefaultPayload.h"
 
-
-JsonUtils::JsonUtils() : doc(2048) {
+JsonUtils::JsonUtils() : jsonDoc(2048) {
 }
 
 /*
 * Load default json payload in a .h file.
 * @param filePath: Path to the JSON file.
 */
-bool JsonUtils::loadDefaultJson() {
-    String payload = fiwarePayload;
-
+bool JsonUtils::loadDefaultJson(String inputJsonAsString) {
     // Deserialize json payload
-    DeserializationError error = deserializeJson(doc, payload);
+    DeserializationError error = deserializeJson(jsonDoc, inputJsonAsString);
     if (error) {
         Serial.print("Error al parsear el JSON: ");
         Serial.println(error.c_str());
@@ -35,7 +31,7 @@ bool JsonUtils::loadDefaultJson() {
 * @param valueType: Type of the new value (e.g., "string", "int", "float", "bool").
 */
 bool JsonUtils::setValue(const String& jsonPath, const String& newValue, const String& valueType) {
-    JsonVariant current = doc.as<JsonVariant>();
+    JsonVariant current = jsonDoc.as<JsonVariant>();
     int start = 0, end;
     while ((end = jsonPath.indexOf('.', start)) != -1) {
         String key = jsonPath.substring(start, end);
@@ -78,6 +74,6 @@ bool JsonUtils::parseAndSet(JsonVariant& target, const String& value, const Stri
 */
 String JsonUtils::getJsonAsString() {
     String output;
-    serializeJson(doc, output);
+    serializeJson(jsonDoc, output);
     return output;
 }

@@ -11,7 +11,11 @@
 int LogsUtils::line=0;
 
 
-//Print a new message into serial port and lcd
+/*
+* Print a message to the serial port and LCD screen.
+* If the LCD is full, it clears the screen and starts from the top.
+* @param message: The message to print.
+*/
 void LogsUtils::printLog(String message) {
   //Print into serial port
   Serial.println(message);

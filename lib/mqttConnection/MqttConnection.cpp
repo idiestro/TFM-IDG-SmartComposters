@@ -5,8 +5,8 @@
 
 #include "MqttConnection.h"
 #include "LogsUtils.h"
-#include "mqttConnectionConfig.h"
-#include ".wifiConfig.h"
+#include "config/mqttConnectionConfig.h"
+#include "config/.wifiConfig.h"
 
 #include <WiFi.h>
 #include <PubSubClient.h>

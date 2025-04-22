@@ -1,0 +1,9 @@
+#ifndef FIWARE_CONFIG_H
+#define FIWARE_CONFIG_H
+
+#define OAUTH_URI "vodafoneEF3A"
+#define BASE_URI "U3AJ6EXDSZ935M"
+#define CLIENT_ID "U3AJ6EXDSZ935M"
+#define CLIENT_SECRET "U3AJ6EXDSZ935M"
+
+#endif

@@ -1,9 +1,23 @@
 #ifndef FIWARE_CONFIG_H
 #define FIWARE_CONFIG_H
 
-#define OAUTH_URI "vodafoneEF3A"
-#define BASE_URI "U3AJ6EXDSZ935M"
-#define CLIENT_ID "U3AJ6EXDSZ935M"
-#define CLIENT_SECRET "U3AJ6EXDSZ935M"
+/*
+* Token Request values
+*/
+#define AUTH_HOST "auth.iotplatform.telefonica.com"
+#define AUTH_PORT "15001"
+#define AUTH_FINAL_URL "/v3/auth/tokens"
+
+/*
+* Token User values
+*/
+#define USERNAME "userCompostera"
+#define PASSWORD "badajozesmas"
+
+/*
+* Token Service values
+*/
+#define SERVICE "smartprovincia"
+#define SUBSERVICE "/Compostera"
 
 #endif

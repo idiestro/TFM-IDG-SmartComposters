@@ -1,7 +1,8 @@
-#ifndef FIWARE_DEFAULT_PAYLOAD_H
-#define FIWARE_DEFAULT_PAYLOAD_H
+#ifndef FIWARE_DEFAULT_PAYLOADS_H
+#define FIWARE_DEFAULT_PAYLOADS_H
 
-const char* fiwarePayload = 
+
+const char* fiwareCreateEntityPayload = 
 R"({
     "biomassFluidAmount": {
         "type": "Number",
@@ -41,6 +42,34 @@ R"({
     },
     "id": "001",
     "type": "composter"
+})";
+
+const char* fiwareAuthPayload = 
+R"({
+    "auth": {
+        "identity": {
+            "methods": [
+                "password"
+            ],
+            "password": {
+                "user": {
+                    "domain": {
+                        "name": "SERVICE"
+                    },
+                    "name": "USERNAME",
+                    "password": "PASSWORD"
+                }
+            }
+        },
+        "scope": {
+            "project": {
+                "domain": {
+                    "name": "SERVICE"
+                },
+                "name": "SUBSERVICE"
+            }
+        }
+    }
 })";
 
 #endif

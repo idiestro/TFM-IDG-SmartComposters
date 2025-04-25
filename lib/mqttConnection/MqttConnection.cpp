@@ -5,8 +5,9 @@
 
 #include "MqttConnection.h"
 #include "LogsUtils.h"
+#include "ConfigReader.h"
 #include "config/mqttConnectionConfig.h"
-#include "config/.wifiConfig.h"
+#include "config/wifiConfig.h"
 
 #include <WiFi.h>
 #include <PubSubClient.h>
@@ -32,7 +33,7 @@ MqttConnection::MqttConnection() : client(espClient) {
 //Setup function to init wifi and broker connection
 void MqttConnection::init(){
     //Init wifi connection
-    wifiConnection(WIFI_SSID, WIFI_PASS);
+    wifiConnection(WIFI_SSID, ConfigReader::base64Decode(String(WIFI_PASS)));
     //Init server
     client.setServer(MQTT_BROKER, MQTT_PORT);
     client.setCallback(callback);

@@ -1,46 +1,88 @@
+# Librerías del Proyecto SmartComposters
 
-This directory is intended for project specific (private) libraries.
-PlatformIO will compile them to static libraries and link into the executable file.
+Este directorio contiene las librerías específicas del proyecto SmartComposters. Cada librería está diseñada para manejar una funcionalidad específica del sistema.
 
-The source code of each library should be placed in a separate directory
-("lib/your_library_name/[Code]").
-
-For example, see the structure of the following example libraries `Foo` and `Bar`:
+## Estructura de Librerías
 
 |--lib
 |  |
-|  |--Bar
-|  |  |--docs
-|  |  |--examples
-|  |  |--src
-|  |     |- Bar.c
-|  |     |- Bar.h
-|  |  |- library.json (optional. for custom build options, etc) https://docs.platformio.org/page/librarymanager/config.html
+|  |--configReader
+|  |  |- ConfigReader.h
+|  |  |- ConfigReader.cpp
 |  |
-|  |--Foo
-|  |  |- Foo.c
-|  |  |- Foo.h
+|  |--jsonUtils
+|  |  |- JsonUtils.h
+|  |  |- JsonUtils.cpp
 |  |
-|  |- README --> THIS FILE
-|
-|- platformio.ini
-|--src
-   |- main.c
+|  |--logsUtils
+|  |  |- LogsUtils.h
+|  |  |- LogsUtils.cpp
+|  |
+|  |--mqttConnection
+|  |  |- MqttConnection.h
+|  |  |- MqttConnection.cpp
+|  |
+|  |--simulatedMeasures
+|  |  |- SimulatedMeasures.h
+|  |  |- SimulatedMeasures.cpp
+|  |
+|  |- README --> ESTE ARCHIVO
 
-Example contents of `src/main.c` using Foo and Bar:
+## Descripción de las Librerías
+
+### configReader
+Librería para la lectura y descifrado de propiedades de configuración. Incluye funcionalidades para:
+- Decodificación de strings en base64
+- Manejo seguro de credenciales y configuraciones
+
+### jsonUtils
+Librería para el manejo de JSON en el proyecto. Proporciona:
+- Carga y parseo de JSON
+- Modificación de valores en documentos JSON
+- Serialización de JSON a string
+- Soporte para diferentes tipos de datos (string, int, float, bool)
+
+### logsUtils
+Librería para el manejo de logs en la pantalla LCD del M5Tough. Características:
+- Visualización de mensajes en la pantalla LCD
+- Gestión automática del scroll de mensajes
+- Impresión simultánea en puerto serie
+- Limpieza automática de la pantalla cuando está llena
+
+### mqttConnection
+Librería para la gestión de conexiones MQTT. Funcionalidades:
+- Conexión a broker MQTT
+- Gestión de conexión WiFi
+- Publicación y suscripción a topics
+- Manejo de mensajes MQTT
+- Reconexión automática
+- Identificación única del dispositivo
+
+### simulatedMeasures
+Librería para la simulación de medidas del compostador. Simula:
+- Temperatura ambiental
+- Humedad ambiental
+- Niveles de O2 y CO2
+- Temperatura de la biomasa
+- Peso de la biomasa
+- Cantidad de fluido
+- pH de la biomasa
+
+## Uso de las Librerías
+
+Para utilizar estas librerías en tu proyecto, simplemente incluye los archivos de cabecera correspondientes:
+
+```cpp
+#include <configReader.h>
+#include <jsonUtils.h>
+#include <logsUtils.h>
+#include <mqttConnection.h>
+#include <simulatedMeasures.h>
+
+// Tu código aquí...
 ```
-#include <Foo.h>
-#include <Bar.h>
 
-int main (void)
-{
-  ...
-}
+El PlatformIO Library Dependency Finder encontrará automáticamente las dependencias necesarias al escanear los archivos fuente del proyecto.
 
-```
-
-The PlatformIO Library Dependency Finder will find automatically dependent
-libraries by scanning project source files.
-
-More information about PlatformIO Library Dependency Finder
+Para más información sobre el PlatformIO Library Dependency Finder:
 - https://docs.platformio.org/page/librarymanager/ldf.html

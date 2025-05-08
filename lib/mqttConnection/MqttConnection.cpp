@@ -15,6 +15,15 @@
 
 //Definitions
 #define payloadBufferSize 80
+MqttConnection* globalMqttInstance = nullptr;
+
+//Callback function outside class
+void mqttCallback(char* topic, byte* payload, unsigned int length) {
+    if (globalMqttInstance != nullptr) {
+        globalMqttInstance->MqttConnection::handleCallback(topic, payload, length);
+    }
+}
+
 
 //Declarations
 WiFiClient espClient;
@@ -24,6 +33,7 @@ LogsUtils logsUtils;
 //BROKER connection
 String clientId;
 
+
 MqttConnection::MqttConnection() : client(espClient) {
     //Set clientId
     setClientId();
@@ -31,24 +41,37 @@ MqttConnection::MqttConnection() : client(espClient) {
 
 //Setup function to init wifi and broker connection
 void MqttConnection::init(){
-    //Init wifi connection
-    wifiConnection(WIFI_SSID, ConfigReader::base64Decode(String(WIFI_PASS)));
-    //Init server
-    client.setServer(MQTT_BROKER, MQTT_PORT);
-    client.setCallback(callback);
-    client.setKeepAlive(keepAliveInterval);
-    //Init broker connection
-    brokerConnection();
+    reconnect();
+}
+
+//Reconnect main function
+void MqttConnection::reconnect(){
+    //Wifi disconnection check
+    if(WiFi.status() != WL_CONNECTED){
+        wifiConnection();
+    }
+    //Broker disconnection check
+    if(!client.connected()){
+        //Init server
+        client.setServer(MQTT_BROKER, MQTT_PORT);
+        globalMqttInstance = this;
+        client.setCallback(mqttCallback);
+        client.setKeepAlive(keepAliveInterval);
+        //Init broker connection
+        brokerConnection();
+        //Topic subscription
+        topicSubscription();
+    }
 }
 
 //Wifi connection manager
-void MqttConnection::wifiConnection(const char* wifiSsid, const char* wifiPassword) {
+void MqttConnection::wifiConnection() {
     delay(10);
     //Print wifi connection info
     LogsUtils::printLog("Conectando a:");
-    LogsUtils::printLog(String(wifiSsid));
+    LogsUtils::printLog(WIFI_SSID);
     //Connect to Wifi
-    WiFi.begin(wifiSsid, wifiPassword);
+    WiFi.begin(WIFI_SSID, ConfigReader::base64Decode(String(WIFI_PASS)));
     //Wait until successfull connection
     while (WiFi.status() != WL_CONNECTED) {
         delay(500);
@@ -81,72 +104,52 @@ void MqttConnection::brokerConnection(){
 }
 
 //Subscribe to topic
-void MqttConnection::topicSubscription(const char* subscriptionTopic) {
+void MqttConnection::topicSubscription() {
     //Topic Subscription
-    if (client.subscribe(subscriptionTopic)) {
+    if (client.subscribe(MQTT_SUBSCRIPTION_TOPIC)) {
         LogsUtils::printLog("Suscrito a topic: ");
-        LogsUtils::printLog(subscriptionTopic);
+        LogsUtils::printLog(MQTT_SUBSCRIPTION_TOPIC);
     } else {
         LogsUtils::printLog("Error al suscribirse al topic: ");
-        LogsUtils::printLog(subscriptionTopic);
+        LogsUtils::printLog(MQTT_SUBSCRIPTION_TOPIC);
     }
 }
 
 //Publish into topic
-void MqttConnection::topicPublication(String payload, const char* publicationTopic){
-    if (!client.connected()) {
-        reconnect();
-    }
-    
+void MqttConnection::topicPublication(String payload){
     //Parse payload into char array
     char message[payloadBufferSize];
     payload.toCharArray(message, payloadBufferSize);
     
     //Send message
-    if (client.publish(publicationTopic, message)) {
+    if (client.publish(MQTT_PUBLICATION_TOPIC, message)) {
         LogsUtils::printLog("Mensaje: ");
         LogsUtils::printLog(payload);
         LogsUtils::printLog("Publicado en topic: ");
-        LogsUtils::printLog(publicationTopic);
+        LogsUtils::printLog(MQTT_PUBLICATION_TOPIC);
     } else {
         LogsUtils::printLog("Error al publicar mensaje");
     }
 }
 
 //Callback para mensajes recibidos
-void MqttConnection::callback(char* topic, byte* payload, unsigned int length) {
-    //Print callback info
+void MqttConnection::handleCallback(char* topic, byte* payload, unsigned int length) {
     LogsUtils::printLog("Mensaje recibido en topic: ");
     LogsUtils::printLog(topic);
     LogsUtils::printLog("- Mensaje: ");
 
-    //Print received message
     String receivedMessage;
     for (int i = 0; i < length; i++) {
         receivedMessage += (char)payload[i];
     }
     LogsUtils::printLog(receivedMessage);
 }
-
 //Extract M5Tough MacAddress
 void MqttConnection::setClientId(){
     clientId = WiFi.macAddress();
 }
 
-//Manejo de reconexión
-bool MqttConnection::reconnect() {
-    unsigned long now = millis();
-    if (now - lastReconnectAttempt > reconnectInterval) {
-        lastReconnectAttempt = now;
-        if (client.connect(clientId.c_str())) {
-            LogsUtils::printLog("Reconectado al broker MQTT");
-            return true;
-        }
-    }
-    return false;
-}
-
-//Método loop para mantener la conexión
+//Loop for mqtt connection
 void MqttConnection::loop() {
     if (!client.connected()) {
         reconnect();
@@ -162,4 +165,3 @@ PubSubClient MqttConnection::getMqttClient(){
 String MqttConnection::getClientId(){
     return clientId;
 }
-

@@ -16,27 +16,28 @@ private:
     WiFiClient espClient;
     PubSubClient client;
     unsigned long lastReconnectAttempt = 0;
-    const unsigned long reconnectInterval = 5000; // 5 segundos
-    const unsigned long keepAliveInterval = 60;   // 60 segundos
+    const unsigned long reconnectInterval = 5000; // 5 sec
+    const unsigned long keepAliveInterval = 15;   // 60 sec
 
-    void wifiConnection(const char* wifiSsid, const char* wifiPassword);
+    void wifiConnection();
     void brokerConnection();
-    bool reconnect();
-    static void callback(char* topic, byte* payload, unsigned int length);
 
 public:
     // Constructor
     MqttConnection();
 
     void init();
-    void topicSubscription(const char* subscriptionTopic);
-    void topicPublication(String payload, const char* publicationTopic);
+    void reconnect();
+    void topicSubscription();
+    void topicPublication(String payload);
     void setClientId();
-    void loop(); // Nuevo método para manejar el loop
+    void loop();
+    void handleCallback(char* topic, byte* payload, unsigned int length);
 
-    // Getter para cliente MQTT
+    // Getter for mqtt client
     PubSubClient getMqttClient();
     String getClientId();
+
 };
 
 #endif

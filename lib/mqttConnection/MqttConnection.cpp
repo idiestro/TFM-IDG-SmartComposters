@@ -14,7 +14,7 @@
 #include <Wire.h>
 
 //Definitions
-#define payloadBufferSize 80
+#define payloadBufferSize 1024
 MqttConnection* globalMqttInstance = nullptr;
 
 //Callback function outside class
@@ -57,6 +57,7 @@ void MqttConnection::reconnect(){
         globalMqttInstance = this;
         client.setCallback(mqttCallback);
         client.setKeepAlive(keepAliveInterval);
+        client.setBufferSize(payloadBufferSize);
         //Init broker connection
         brokerConnection();
         //Topic subscription
@@ -117,6 +118,11 @@ void MqttConnection::topicSubscription() {
 
 //Publish into topic
 void MqttConnection::topicPublication(String payload){
+    //Check if payload > buffer size
+    if (payload.length() + 1 > payloadBufferSize) {
+        LogsUtils::printLog("Error: El payload excede el tamaño del buffer.");
+        return;
+    }
     //Parse payload into char array
     char message[payloadBufferSize];
     payload.toCharArray(message, payloadBufferSize);

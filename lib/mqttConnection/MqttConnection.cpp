@@ -129,8 +129,9 @@ void MqttConnection::topicPublication(String payload){
     
     //Send message
     if (client.publish(MQTT_PUBLICATION_TOPIC, message)) {
-        LogsUtils::printLog("Mensaje: ");
-        LogsUtils::printLog(payload);
+        LogsUtils::printLog("Mensaje Mqtt");
+        Serial.println(payload);
+        //LogsUtils::printLog(payload);
         LogsUtils::printLog("Publicado en topic: ");
         LogsUtils::printLog(MQTT_PUBLICATION_TOPIC);
     } else {

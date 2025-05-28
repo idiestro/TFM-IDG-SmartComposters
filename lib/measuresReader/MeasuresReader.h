@@ -22,6 +22,12 @@ class MeasuresReader {
         float getBiomassWeight();
         float getBiomassFluidAmount();
         float getBiomassPh();
+    
+    private:
+        void initI2CWire();
+        void initEnvIv();
+        void initEns160();
+        void initDS18B20();
 };
 
 #endif

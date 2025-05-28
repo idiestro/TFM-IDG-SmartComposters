@@ -10,40 +10,39 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include "M5UnitENV.h"
+#include "ScioSense_ENS160.h"
+#include <OneWire.h>
+#include <DallasTemperature.h>
 
 
-
+//Temporization data
+unsigned long lastEns160RequestTime = 0;
 //Enviv Unit
 SHT4X sht4;
 BMP280 bmp;
+//ENS160
+ScioSense_ENS160 ens160(ENS160_I2CADDR_1);
+float lastCo2Value = -1.0;
+bool ens160MeasurementRequested = false;
+//DE18B20
+#define ONE_WIRE_BUS 0
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature sensors(&oneWire);
+//PH sensor
+#define PH_PIN 35
 
 MeasuresReader::MeasuresReader(){
 }
 
 void MeasuresReader::initSensors(){
-    //Init Wire
-    Wire.begin(32, 33);
-    //ENVIV UNIT
-    //SHT40
-        if (!sht4.begin(&Wire, SHT40_I2C_ADDR_44, 32, 33, 400000U)) {
-        Serial.println("Couldn't find SHT4x");
-        while (1) delay(1);
-    }
-
-    // You can have 3 different precisions, higher precision takes longer
-    sht4.setPrecision(SHT4X_HIGH_PRECISION);
-    sht4.setHeater(SHT4X_NO_HEATER);
-
-    if (!bmp.begin(&Wire, BMP280_I2C_ADDR, 32, 33, 400000U)) {
-        Serial.println("Couldn't find BMP280");
-        while (1) delay(1);
-    }
-    /* Default settings from datasheet. */
-    bmp.setSampling(BMP280::MODE_NORMAL,     /* Operating Mode. */
-                    BMP280::SAMPLING_X2,     /* Temp. oversampling */
-                    BMP280::SAMPLING_X16,    /* Pressure oversampling */
-                    BMP280::FILTER_X16,      /* Filtering. */
-                    BMP280::STANDBY_MS_500); /* Standby time. */
+    //Init I2C wire
+    initI2CWire();
+    //Init ENV IV sensor
+//    initEnvIv();
+    //Init ENS160
+//    initEns160();
+    //Init DS18B20
+    initDS18B20();
 
 }
 
@@ -61,30 +60,98 @@ float MeasuresReader::getEnvironmentHumidity() {
 
 // Función para obtener el nivel de oxígeno en el gas ambiental simulado
 float MeasuresReader::getEnvironmentGasO2() {
-    return 19 + rand() % 2;  // Oxígeno entre 19% y 20%
+    return -1;  // Oxígeno entre 19% y 20%
 }
 
 // Función para obtener el nivel de dióxido de carbono en el gas ambiental simulado
 float MeasuresReader::getEnvironmentGasCO2() {
-    return 0.04 + rand() % 3 * 0.01;  // CO2 entre 0.04% y 0.1%
+    //Get measurement delay time
+    const unsigned long MEASUREMENT_DELAY = 200;
+
+    if (!ens160MeasurementRequested) {
+        // New measurement requested
+        ens160.measure();
+        lastEns160RequestTime = millis();
+        ens160MeasurementRequested = true;
+    } else if (millis() - lastEns160RequestTime >= MEASUREMENT_DELAY) {
+        if (ens160.available()) {
+            lastCo2Value = ens160.geteCO2();
+            //Set for new medition
+            ens160MeasurementRequested = false; 
+        }
+    }
+    return lastCo2Value; 
 }
 
 // Función para obtener la temperatura de la biomasa simulada
 float MeasuresReader::getBiomassTemperature() {
-    return 30 + rand() % 11;  // Temperatura de biomasa entre 30 y 40°C
+    sensors.requestTemperatures();
+    return sensors.getTempCByIndex(0);
 }
 
 // Función para obtener el peso de la biomasa simulada
 float MeasuresReader::getBiomassWeight() {
-    return 100 + rand() % 901;  // Peso entre 100g y 1000g
+    return -1;  // Peso entre 100g y 1000g
 }
 
 // Función para obtener la cantidad de fluido de la biomasa simulada
 float MeasuresReader::getBiomassFluidAmount() {
-    return 10 + rand() % 91;  // Fluido entre 10ml y 100ml
+    return -1;  // Fluido entre 10ml y 100ml
 }
 
 // Función para obtener el pH de la biomasa simulada
 float MeasuresReader::getBiomassPh() {
-    return 6 + rand() % 5;  // pH entre 6 y 10
+    int analogValue = analogRead(PH_PIN);
+    float voltage = analogValue * (5.0 / 4095.0); // 5 for 5V reference, could be 3.3 for 3.3V reference
+    return voltage;  // pH entre 6 y 10
+}
+
+//Init I2C wire
+void MeasuresReader::initI2CWire(){
+    Wire.begin(32, 33);
+}
+
+//Init ENVIV UNIT with I2C
+void MeasuresReader::initEnvIv(){
+    //SHT40
+        if (!sht4.begin(&Wire, SHT40_I2C_ADDR_44, 32, 33, 400000U)) {
+        Serial.println("SHT4x no encontrado");
+        while (1) delay(1);
+    }
+
+    // Precision and heater settings
+    sht4.setPrecision(SHT4X_HIGH_PRECISION);
+    sht4.setHeater(SHT4X_NO_HEATER);
+
+    if (!bmp.begin(&Wire, BMP280_I2C_ADDR, 32, 33, 400000U)) {
+        Serial.println("BMP28 no encontrado0");
+        while (1) delay(1);
+    }
+    // Default settings from datasheet
+    bmp.setSampling(BMP280::MODE_NORMAL,     // Operating Mode
+                    BMP280::SAMPLING_X2,     // Temp. oversampling 
+                    BMP280::SAMPLING_X16,    // Pressure oversampling 
+                    BMP280::FILTER_X16,      // Filtering 
+                    BMP280::STANDBY_MS_500); // Standby time
+}
+
+//Init ENS160+AHT21
+void MeasuresReader::initEns160(){
+    // ENS160
+    if (!ens160.begin()) {
+        Serial.println("ENS160 no encontrado");
+        while (1);
+    }
+    //Set in Standard mode
+    ens160.setMode(ENS160_OPMODE_STD);
+    //Active automatic meditions
+    //ens160.measure(true); //Not needed, batery save
+
+}
+
+//Init DS18B20
+void MeasuresReader::initDS18B20(){
+    // Initialize the OneWire bus
+    sensors.begin();
+    sensors.setResolution(12);  // Set resolution to 12 bits
 }

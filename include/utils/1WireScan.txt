@@ -1,0 +1,23 @@
+#include <OneWire.h>
+
+#define ONE_WIRE_BUS 26  // GPIO26 (Amarillo en Grove Port B)
+
+OneWire oneWire(ONE_WIRE_BUS);
+
+void setup() {
+  Serial.begin(115200);
+  Serial.println("Buscando dispositivos 1-Wire...");
+
+  byte addr[8];
+  while (oneWire.search(addr)) {
+    Serial.print("Sensor encontrado: ");
+    for (int i = 0; i < 8; i++) {
+      if (addr[i] < 16) Serial.print("0");
+      Serial.print(addr[i], HEX);
+    }
+    Serial.println();
+  }
+}
+
+void loop() {
+}

@@ -1,0 +1,31 @@
+#include <Wire.h>
+
+void setup() {
+  Serial.begin(115200);
+  Wire.begin(32, 33);  // Pines SDA y SCL del M5Tough (Puerto A)
+  delay(1000);
+
+  Serial.println("Escaneando dispositivos I2C...");
+
+  byte count = 0;
+  for (byte address = 1; address < 127; ++address) {
+    Wire.beginTransmission(address);
+    if (Wire.endTransmission() == 0) {
+      Serial.print("Dispositivo I2C encontrado en 0x");
+      Serial.println(address, HEX);
+      count++;
+    }
+    delay(5);
+  }
+
+  if (count == 0) {
+    Serial.println("No se encontraron dispositivos I2C.");
+  } else {
+    Serial.print("Total encontrados: ");
+    Serial.println(count);
+  }
+}
+
+void loop() {
+  // Nada
+}

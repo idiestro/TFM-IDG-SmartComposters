@@ -50,6 +50,17 @@ deploy_stack() {
   mkdir -p "$MOSQUITTO_DIR/data"
   mkdir -p "$NODE_RED_DIR/data"
 
+  echo "🔄 Verificando flows.json de Node-RED..."
+
+  # Copiar flows.json si no existe ya en data
+  TARGET_FLOW="$NODE_RED_DIR/data/flows.json"
+  if [ ! -f "$TARGET_FLOW" ]; then
+    echo "📥 Copiando flows.json inicial..."
+    cp "$NODE_RED_DIR/flows.json" "$TARGET_FLOW"
+  else
+    echo "ℹ️ flows.json ya existe en 'data/', no se sobrescribe."
+  fi
+
   echo "🚢 Lanzando contenedores..."
   docker compose -f "$COMPOSE_FILE" up -d
 

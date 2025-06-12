@@ -8,6 +8,14 @@ MOSQUITTO_DIR="$SCRIPT_DIR/mosquitto"
 NODE_RED_DIR="$SCRIPT_DIR/node-red"
 COMPOSE_FILE="$SCRIPT_DIR/docker-compose.yml"
 
+# === ACTUALIZACIÓN DEL REPO ===
+if git -C "$SCRIPT_DIR/../" rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+  echo "📡 Actualizando el repositorio desde remoto..."
+  git -C "$SCRIPT_DIR/../" pull
+else
+  echo "⚠️ No se detectó un repositorio Git válido. Se omite el pull."
+fi
+
 echo "🚀 Iniciando despliegue desde el sistema local..."
 
 # === FUNCIONES ===

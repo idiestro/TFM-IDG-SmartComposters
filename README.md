@@ -104,6 +104,216 @@ Los sensores se auto-detectan en los puertos:
 3. Configura la dirección del broker MQTT
 4. Accede al dashboard web en `http://localhost:1880/ui`
 
+## Despliegue en Raspberry PI
+
+El proyecto incluye un sistema completo de despliegue con **Docker** diseñado específicamente para ejecutarse en **Raspberry PI**. Esta solución proporciona una infraestructura robusta y escalable que incluye el broker MQTT y el dashboard Node-RED ejecutándose como servicios containerizados.
+
+### Arquitectura del despliegue
+
+La solución de contenedores incluye:
+- **Mosquitto MQTT Broker**: Servicio de mensajería ejecutándose en puerto 1884
+- **Node-RED**: Dashboard web y motor de flujos en puerto 1880
+- **Red Docker interna**: Para comunicación segura entre servicios
+- **Persistencia de datos**: Volúmenes montados para mantener configuraciones y datos
+
+### Estructura de archivos Docker
+
+```
+docker/
+├── docker-compose.yml          # Orquestación de servicios
+├── deploy.sh                   # Script de despliegue automatizado
+├── mosquitto/
+│   ├── mosquitto.conf         # Configuración del broker MQTT
+│   └── data/                  # Datos persistentes de Mosquitto
+└── node-red/
+    ├── flows.json            # Configuración de flujos Node-RED
+    └── data/                 # Datos persistentes de Node-RED
+```
+
+### Configuración de servicios
+
+#### Mosquitto MQTT Broker
+- **Puerto**: 1884 (no estándar para evitar conflictos)
+- **Conexiones anónimas**: Habilitadas para facilitar desarrollo
+- **Persistencia**: Datos guardados en `./mosquitto/data`
+- **Configuración**: Archivo extenso con todas las opciones disponibles
+
+#### Node-RED
+- **Puerto**: 1880 (estándar)
+- **Imagen**: `nodered/node-red:latest`
+- **Flows**: Configuración inicial copiada automáticamente
+- **Persistencia**: Datos guardados en `./node-red/data`
+
+### Instalación automática
+
+El script `deploy.sh` proporciona una instalación completamente automatizada:
+
+#### Características del script:
+- **Detección de Git**: Actualiza automáticamente el repositorio
+- **Instalación de Docker**: Instala Docker si no está presente
+- **Instalación de Docker Compose v2**: Compatible con arquitecturas ARM
+- **Detección de arquitectura**: Soporte para aarch64, armv7l y x86_64
+- **Creación de directorios**: Estructura necesaria para persistencia
+- **Configuración inicial**: Copia automática de flows.json
+
+#### Ejecución del despliegue:
+
+```bash
+# Navegar a la carpeta docker
+cd docker/
+
+# Ejecutar el script de despliegue
+chmod +x deploy.sh
+./deploy.sh
+```
+
+### Instalación manual paso a paso
+
+Si prefieres un control manual del proceso:
+
+#### 1. Preparar el sistema
+```bash
+# Actualizar el sistema
+sudo apt update && sudo apt upgrade -y
+
+# Instalar Docker (si no está instalado)
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+sudo usermod -aG docker $USER
+
+# Reiniciar sesión o ejecutar
+newgrp docker
+```
+
+#### 2. Instalar Docker Compose v2
+```bash
+# Crear directorio para plugins
+mkdir -p ~/.docker/cli-plugins
+
+# Descargar Docker Compose para Raspberry PI (ARM64)
+curl -SL https://github.com/docker/compose/releases/download/v2.24.6/docker-compose-linux-aarch64 \
+  -o ~/.docker/cli-plugins/docker-compose
+
+# Dar permisos de ejecución
+chmod +x ~/.docker/cli-plugins/docker-compose
+```
+
+#### 3. Preparar configuraciones
+```bash
+# Crear directorios necesarios
+mkdir -p docker/mosquitto/data
+mkdir -p docker/node-red/data
+
+# Copiar configuración inicial de Node-RED
+cp docker/node-red/flows.json docker/node-red/data/flows.json
+```
+
+#### 4. Lanzar los servicios
+```bash
+# Desde la carpeta docker
+docker compose up -d
+```
+
+### Verificación del despliegue
+
+#### Comprobar estado de los contenedores:
+```bash
+# Ver servicios ejecutándose
+docker compose ps
+
+# Ver logs de los servicios
+docker compose logs mosquitto
+docker compose logs node-red
+```
+
+#### Acceso a los servicios:
+- **Node-RED Dashboard**: `http://[IP_RASPBERRY]:1880/ui`
+- **Node-RED Editor**: `http://[IP_RASPBERRY]:1880`
+- **MQTT Broker**: `[IP_RASPBERRY]:1884`
+
+### Configuración de dispositivos M5Stack
+
+Para conectar los dispositivos M5Stack a la Raspberry PI, actualiza los archivos de configuración:
+
+#### `include/config/mqttConnectionConfig.h`:
+```cpp
+// Cambiar la IP por la de tu Raspberry PI
+#define MQTT_SERVER_IP "192.168.1.XXX"  // IP de la Raspberry PI
+#define MQTT_SERVER_PORT 1884            // Puerto configurado en Docker
+```
+
+### Gestión del sistema
+
+#### Comandos útiles:
+```bash
+# Parar todos los servicios
+docker compose down
+
+# Reiniciar servicios
+docker compose restart
+
+# Ver logs en tiempo real
+docker compose logs -f
+
+# Actualizar servicios (después de cambios en configuración)
+docker compose down && docker compose up -d
+
+# Limpiar recursos no utilizados
+docker system prune -f
+```
+
+#### Backup y restauración:
+```bash
+# Backup de configuraciones
+tar -czf backup-docker-$(date +%Y%m%d).tar.gz docker/
+
+# Restaurar desde backup
+tar -xzf backup-docker-YYYYMMDD.tar.gz
+```
+
+### Monitorización y mantenimiento
+
+#### Ver uso de recursos:
+```bash
+# Estadísticas de contenedores
+docker stats
+
+# Espacio usado por Docker
+docker system df
+```
+
+#### Logs del sistema:
+```bash
+# Logs de arranque de la Raspberry PI
+sudo journalctl -b
+
+# Logs específicos de Docker
+sudo journalctl -u docker
+```
+
+### Solución de problemas comunes
+
+#### Error de permisos:
+```bash
+# Añadir usuario al grupo docker
+sudo usermod -aG docker $USER
+newgrp docker
+```
+
+#### Puerto ocupado:
+```bash
+# Verificar puertos en uso
+sudo netstat -tlnp | grep :1880
+sudo netstat -tlnp | grep :1884
+```
+
+#### Problemas de conectividad MQTT:
+```bash
+# Probar conexión MQTT desde línea de comandos
+mosquitto_pub -h localhost -p 1884 -t test/topic -m "hello"
+mosquitto_sub -h localhost -p 1884 -t test/topic
+```
+
 ## Uso
 
 ### Modo desarrollo

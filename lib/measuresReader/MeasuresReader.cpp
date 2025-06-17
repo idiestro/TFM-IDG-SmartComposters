@@ -38,9 +38,9 @@ void MeasuresReader::initSensors(){
     //Init I2C wire
     initI2CWire();
     //Init ENV IV sensor
-//    initEnvIv();
+    initEnvIv();
     //Init ENS160
-//    initEns160();
+    initEns160();
     //Init DS18B20
     initDS18B20();
 

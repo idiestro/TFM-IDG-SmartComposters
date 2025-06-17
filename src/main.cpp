@@ -4,16 +4,19 @@
 */
 
 #include <M5Unified.h>
+#include <Wire.h>
 #include "config/mainConfig.h"
 
 //Utils libraries
 #include "MqttConnection.h"
 #include "LogsUtils.h"
 #include "MeasuresDataHelper.h"
+#include "MeasuresReader.h"
 
 //Instance classes
 MqttConnection mqttConnection;
 MeasuresDataHelper measuresDataHelper;
+MeasuresReader measuresReader;
 
 //Main values
 String composterId;
@@ -28,9 +31,9 @@ void setup(void) {
     LogsUtils::printLog("---Iniciando sistema---");
     //Init wifi and broker connection
     mqttConnection.init();
+    //Init measures reader
+    measuresReader.initSensors();
     LogsUtils::printLog("---Sistema iniciado---");
-    //Get composter ID
-    composterId = mqttConnection.getClientId();
     //Wait after setup
     delay(5000);
 }
@@ -48,10 +51,10 @@ void loop(void) {
 
     if (currentMillis - lastPublishTime >= 10000) { // 10 seconds
         lastPublishTime = currentMillis;
-            // Set composter ID
-            measuresDataHelper.setComposterId(composterId);
-            // Set measures data
-            mqttConnection.topicPublication(measuresDataHelper.setMeasuresIntoJson());
+        //Get measures from sensors and set into final payload
+        String finalPayload = measuresDataHelper.setMeasuresIntoJson();
+        //Publish measures to MQTT broker
+        mqttConnection.topicPublication(finalPayload);
     }
 }
 

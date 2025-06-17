@@ -46,24 +46,24 @@ void MeasuresReader::initSensors(){
 
 }
 
-// Función para obtener la temperatura ambiental simulada
+// Get environment temperature from SHT4X sensor
 float MeasuresReader::getEnvironmentTemperature() {
     sht4.update();
     return sht4.cTemp;
 }
 
-// Función para obtener la humedad ambiental simulada
+// Get environment humidity from SHT4X sensor
 float MeasuresReader::getEnvironmentHumidity() {
     sht4.update();
     return sht4.humidity;
 }
 
-// Función para obtener el nivel de oxígeno en el gas ambiental simulado
+// Get environment gas O2 level
 float MeasuresReader::getEnvironmentGasO2() {
-    return -1;  // Oxígeno entre 19% y 20%
+    return -1;
 }
 
-// Función para obtener el nivel de dióxido de carbono en el gas ambiental simulado
+// Get environment gas CO2 level using ENS160
 float MeasuresReader::getEnvironmentGasCO2() {
     //Get measurement delay time
     const unsigned long MEASUREMENT_DELAY = 200;
@@ -83,27 +83,27 @@ float MeasuresReader::getEnvironmentGasCO2() {
     return lastCo2Value; 
 }
 
-// Función para obtener la temperatura de la biomasa simulada
+// Get biomass temperature from DS18B20 sensor
 float MeasuresReader::getBiomassTemperature() {
     sensors.requestTemperatures();
     return sensors.getTempCByIndex(0);
 }
 
-// Función para obtener el peso de la biomasa simulada
+// Get biomass weight
 float MeasuresReader::getBiomassWeight() {
-    return -1;  // Peso entre 100g y 1000g
+    return -1;  
 }
 
-// Función para obtener la cantidad de fluido de la biomasa simulada
+// Get biomass fluid amount
 float MeasuresReader::getBiomassFluidAmount() {
-    return -1;  // Fluido entre 10ml y 100ml
+    return -1;  
 }
 
-// Función para obtener el pH de la biomasa simulada
+// Get biomass pH level from analog pin
 float MeasuresReader::getBiomassPh() {
     int analogValue = analogRead(PH_PIN);
     float voltage = analogValue * (5.0 / 4095.0); // 5 for 5V reference, could be 3.3 for 3.3V reference
-    return voltage;  // pH entre 6 y 10
+    return voltage;
 }
 
 //Init I2C wire

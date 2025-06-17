@@ -1,5 +1,5 @@
 /*
-    SimularedMeasures.h - Library for simulate measures from composter
+    MeasuresReader.h - Library for get measures from composter sensors
     Created by Ignacio Diestro Gil - 2025
 */
 

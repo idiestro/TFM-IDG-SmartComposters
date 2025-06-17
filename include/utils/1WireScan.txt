@@ -1,6 +1,6 @@
 #include <OneWire.h>
 
-#define ONE_WIRE_BUS 26  // GPIO26 (Amarillo en Grove Port B)
+#define ONE_WIRE_BUS 0  // GPIO26 (Amarillo en Grove Port B)
 
 OneWire oneWire(ONE_WIRE_BUS);
 

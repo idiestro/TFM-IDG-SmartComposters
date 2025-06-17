@@ -20,16 +20,17 @@ MeasuresReader measuresReader;
 JsonUtils jsonUtils;
 
 MeasuresDataHelper::MeasuresDataHelper(){
-    
+    //Load initial nitial Json payload
     jsonUtils.loadDefaultJson(fiwareFormatPayload);
 }
 
+// Set composter ID into the JSON payload
 void MeasuresDataHelper::setComposterId(String composterId) {
     // Set composter ID
     jsonUtils.setValue("id", composterId, "string");
 }   
 
-
+// Get measures and set into JSON payload
 String MeasuresDataHelper::setMeasuresIntoJson() {
     // Set values in JSON
     //Environment variables

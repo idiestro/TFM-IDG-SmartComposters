@@ -26,7 +26,7 @@ void setup(void) {
     //Init M5 and serial port
     auto cfg = M5.config();
     M5.begin(cfg);
-    Serial.begin(115200);
+    Serial.begin(PORT_SPEED);
     //Initial message
     LogsUtils::printLog("---Iniciando sistema---");
     //Init wifi and broker connection

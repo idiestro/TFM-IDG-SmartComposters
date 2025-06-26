@@ -28,7 +28,7 @@ void LogsUtils::printLog(String message) {
     line = 0;
   }
 
-  M5.Lcd.setCursor(10, 10 + line * lineHeight); // Coordenadas X, Y
+  M5.Lcd.setCursor(10, 10 + line * lineHeight); // X, Y coordinates
   M5.Lcd.print(message);
   line++;
 }

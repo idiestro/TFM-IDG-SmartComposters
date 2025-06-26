@@ -16,7 +16,7 @@
 
 //Init classes
 SimulatedMeasures simulatedMeasures;
-MeasuresReader measuresReader;
+extern MeasuresReader measuresReader;
 JsonUtils jsonUtils;
 
 MeasuresDataHelper::MeasuresDataHelper(){

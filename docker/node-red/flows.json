@@ -1,38 +1,6 @@
 [
     {
-        "id": "163f6ae825dc5b80",
-        "type": "tab",
-        "label": "Simulador Datos Compostera",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "2bf8d304966b1adb",
-        "type": "tab",
-        "label": "Conexiones MQTT",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "be23931a122611c2",
-        "type": "tab",
-        "label": "UI Control / Dashboards",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "5dcbb0ae8a39c5a3",
-        "type": "tab",
-        "label": "Computación de Borde",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "af5896ddd7b05240",
+        "id": "f8178ed7c460ebb3",
         "type": "tab",
         "label": "Conexión Fiware",
         "disabled": false,
@@ -40,297 +8,10 @@
         "env": []
     },
     {
-        "id": "6555cd36913d2453",
-        "type": "mqtt-broker",
-        "name": "mosquitto_broker",
-        "broker": "192.168.0.14",
-        "port": "1884",
-        "clientid": "node-red",
-        "autoConnect": true,
-        "usetls": false,
-        "protocolVersion": "4",
-        "keepalive": "60",
-        "cleansession": true,
-        "autoUnsubscribe": true,
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthRetain": "false",
-        "birthPayload": "",
-        "birthMsg": {},
-        "closeTopic": "",
-        "closeQos": "0",
-        "closeRetain": "false",
-        "closePayload": "",
-        "closeMsg": {},
-        "willTopic": "",
-        "willQos": "0",
-        "willRetain": "false",
-        "willPayload": "",
-        "willMsg": {},
-        "userProps": "",
-        "sessionExpiry": ""
-    },
-    {
-        "id": "88fac6f5c988d196",
-        "type": "ui_tab",
-        "name": "Mediciones Composteras",
-        "icon": "dashboard",
-        "order": 1,
-        "disabled": false,
-        "hidden": false
-    },
-    {
-        "id": "79841b8810581310",
-        "type": "ui_group",
-        "name": "Compostera 001",
-        "tab": "88fac6f5c988d196",
-        "order": 1,
-        "disp": true,
-        "width": 24,
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "5d6dcd2832255c4f",
-        "type": "ui_group",
-        "name": "Compostera 002",
-        "tab": "88fac6f5c988d196",
-        "order": 2,
-        "disp": true,
-        "width": 24,
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "0e5f12245b01afa7",
-        "type": "ui_base",
-        "theme": {
-            "name": "theme-dark",
-            "lightTheme": {
-                "default": "#0094CE",
-                "baseColor": "#0094CE",
-                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
-                "edited": true,
-                "reset": false
-            },
-            "darkTheme": {
-                "default": "#097479",
-                "baseColor": "#097479",
-                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
-                "edited": true,
-                "reset": false
-            },
-            "customTheme": {
-                "name": "Untitled Theme 1",
-                "default": "#4B7930",
-                "baseColor": "#4B7930",
-                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
-            },
-            "themeState": {
-                "base-color": {
-                    "default": "#097479",
-                    "value": "#097479",
-                    "edited": false
-                },
-                "page-titlebar-backgroundColor": {
-                    "value": "#097479",
-                    "edited": false
-                },
-                "page-backgroundColor": {
-                    "value": "#111111",
-                    "edited": false
-                },
-                "page-sidebar-backgroundColor": {
-                    "value": "#333333",
-                    "edited": false
-                },
-                "group-textColor": {
-                    "value": "#0eb8c0",
-                    "edited": false
-                },
-                "group-borderColor": {
-                    "value": "#555555",
-                    "edited": false
-                },
-                "group-backgroundColor": {
-                    "value": "#333333",
-                    "edited": false
-                },
-                "widget-textColor": {
-                    "value": "#eeeeee",
-                    "edited": false
-                },
-                "widget-backgroundColor": {
-                    "value": "#097479",
-                    "edited": false
-                },
-                "widget-borderColor": {
-                    "value": "#333333",
-                    "edited": false
-                },
-                "base-font": {
-                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
-                }
-            },
-            "angularTheme": {
-                "primary": "indigo",
-                "accents": "blue",
-                "warn": "red",
-                "background": "grey",
-                "palette": "light"
-            }
-        },
-        "site": {
-            "name": "Node-RED Dashboard",
-            "hideToolbar": "false",
-            "allowSwipe": "false",
-            "lockMenu": "false",
-            "allowTempTheme": "true",
-            "dateFormat": "DD/MM/YYYY",
-            "sizes": {
-                "sx": 48,
-                "sy": 48,
-                "gx": 6,
-                "gy": 6,
-                "cx": 6,
-                "cy": 6,
-                "px": 0,
-                "py": 0
-            }
-        }
-    },
-    {
-        "id": "fa42dc8b88ee2c55",
-        "type": "ui_spacer",
-        "z": "be23931a122611c2",
-        "name": "spacer",
-        "group": "79841b8810581310",
-        "order": 5,
-        "width": 24,
-        "height": 1
-    },
-    {
-        "id": "671842d8514b9e9e",
-        "type": "ui_spacer",
-        "z": "be23931a122611c2",
-        "name": "spacer",
-        "group": "5d6dcd2832255c4f",
-        "order": 5,
-        "width": 24,
-        "height": 1
-    },
-    {
-        "id": "0783168843f905fd",
-        "type": "inject",
-        "z": "163f6ae825dc5b80",
-        "name": "Mensaje MQTT compostera",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "5",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "composter/measurements",
-        "payload": "{\"id\":\"001\",\"type\":\"composter\",\"environmentTemperature\":{\"value\":0,\"type\":\"Number\"},\"environmentHumidity\":{\"value\":0,\"type\":\"Number\"},\"environmentGasO2\":{\"value\":0,\"type\":\"Number\"},\"environmentGasCO2\":{\"value\":0,\"type\":\"Number\"},\"biomassTemperature\":{\"value\":0,\"type\":\"Number\"},\"biomassWeight\":{\"value\":0,\"type\":\"Number\"},\"biomassFluidAmount\":{\"value\":0,\"type\":\"Number\"},\"biomassPh\":{\"value\":0,\"type\":\"Number\"}}",
-        "payloadType": "json",
-        "x": 220,
-        "y": 200,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "191d8ce631831b5e",
-        "type": "function",
-        "z": "163f6ae825dc5b80",
-        "name": "Simulador valores Random",
-        "func": "// Define los rangos para cada valor\nconst minTemperature = 15, maxTemperature = 35;         // Temperatura entre 15°C y 35°C\nconst minHumidity = 30, maxHumidity = 80;               // Humedad entre 30% y 80%\nconst minO2 = 10, maxO2 = 21;                           // Oxígeno entre 10% y 21%\nconst minCO2 = 0.1, maxCO2 = 5;                         // Dióxido de carbono entre 0.1% y 5%\nconst minWeight = 5, maxWeight = 50;                    // Peso entre 5kg y 50kg\nconst minFluidAmount = 0, maxFluidAmount = 10;  // Cantidad de lixiviados entre 0 y 10L\nconst minFluidPh = 4, maxFluidPh = 9;           // pH de lixiviados entre 4 y 9\n\n// Genera un valor aleatorio dentro de un rango dado\nfunction randomInRange(min, max) {\n    return +(Math.random() * (max - min) + min).toFixed(2);\n}\n\n// Crea el objeto con los valores aleatorios\nmsg.payload = {\n    \"id\": \"001\",\n\t\"type\": \"composter\",\n\t\"environmentTemperature\":{\n\t\t\"value\": randomInRange(minTemperature, maxTemperature),\n\t\t\"type\": \"Number\"\n\t},\n\t\"environmentHumidity\":{\n\t\t\"value\": randomInRange(minHumidity, maxHumidity),\n\t\t\"type\": \"Number\"\n\t},\n\t\"environmentGasO2\":{\n\t\t\"value\": randomInRange(minO2, maxO2),\n\t\t\"type\": \"Number\"\n\t},\n\t\"environmentGasCO2\":{\n\t\t\"value\": randomInRange(minCO2, maxCO2),\n\t\t\"type\": \"Number\"\n\t},\n\t\"biomassTemperature\":{\n\t\t\"value\": randomInRange(minTemperature, maxTemperature),\n\t\t\"type\": \"Number\"\n\t},\n\t\"biomassWeight\":{\n\t\t\"value\": randomInRange(minWeight, maxWeight),\n\t\t\"type\": \"Number\"\n\t},\n\t\"biomassFluidAmount\":{\n\t\t\"value\": randomInRange(minFluidAmount, maxFluidAmount),\n\t\t\"type\": \"Number\"\n\t},\n\t\"biomassPh\":{\n\t\t\"value\": randomInRange(minFluidPh, maxFluidPh),\n\t\t\"type\": \"Number\"\n\t}\n};\n\n// Devuelve el mensaje modificado\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 560,
-        "y": 200,
-        "wires": [
-            [
-                "aed973dea0753052",
-                "b17f8eeafd7ca1f2"
-            ]
-        ]
-    },
-    {
-        "id": "aed973dea0753052",
+        "id": "06061d1402de7531",
         "type": "debug",
-        "z": "163f6ae825dc5b80",
-        "name": "Simulador Datos Random",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 930,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "b17f8eeafd7ca1f2",
-        "type": "mqtt out",
-        "z": "163f6ae825dc5b80",
-        "name": "Envío Datos Compostera",
-        "topic": "boker/control",
-        "qos": "1",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "6555cd36913d2453",
-        "x": 930,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "3f6077c82458202d",
-        "type": "mqtt in",
-        "z": "2bf8d304966b1adb",
-        "name": "Recepción Datos Raspi",
-        "topic": "#",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "6555cd36913d2453",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 480,
-        "y": 220,
-        "wires": [
-            [
-                "06b9c85a8a8f2c89",
-                "711e87a7580f828d",
-                "510a115d09c95376",
-                "abbdf0c00f7e8726"
-            ]
-        ]
-    },
-    {
-        "id": "abbdf0c00f7e8726",
-        "type": "debug",
-        "z": "2bf8d304966b1adb",
-        "name": "Recepción Datos Composteras",
+        "z": "f8178ed7c460ebb3",
+        "name": "Fiware Data Response",
         "active": false,
         "tosidebar": true,
         "console": false,
@@ -339,624 +20,14 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 910,
-        "y": 360,
-        "wires": []
-    },
-    {
-        "id": "06b9c85a8a8f2c89",
-        "type": "link out",
-        "z": "2bf8d304966b1adb",
-        "name": "MQTT -  UI [out]",
-        "mode": "link",
-        "links": [
-            "5ceb8ad97b377e1e"
-        ],
-        "x": 815,
-        "y": 80,
-        "wires": []
-    },
-    {
-        "id": "711e87a7580f828d",
-        "type": "function",
-        "z": "2bf8d304966b1adb",
-        "name": "Set Composters Info",
-        "func": "// Almacenar el Id de la compostera\nglobal.set('composter-id', msg.payload.id);\n\n//Eliminar Id y type del payload\ndelete msg.payload.id;\ndelete msg.payload.type;\n// Almacenar el payload en el contexto de flujo\nglobal.set('mqtt-payload', msg.payload);\n\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 880,
-        "y": 260,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "510a115d09c95376",
-        "type": "link out",
-        "z": "2bf8d304966b1adb",
-        "name": "MQTT -  Fiware [out]",
-        "mode": "link",
-        "links": [
-            "d28aa9260cf8d1d7"
-        ],
-        "x": 815,
-        "y": 140,
-        "wires": []
-    },
-    {
-        "id": "8ec0f7df838adcf0",
-        "type": "ui_gauge",
-        "z": "be23931a122611c2",
-        "name": "",
-        "group": "79841b8810581310",
-        "order": 1,
-        "width": 6,
-        "height": 6,
-        "gtype": "gage",
-        "title": "Temperatura Entorno",
-        "label": "ºC",
-        "format": "{{msg.environmentTemperature.value}}",
-        "min": "-20",
-        "max": "50",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 1180,
-        "y": 80,
-        "wires": []
-    },
-    {
-        "id": "5ceb8ad97b377e1e",
-        "type": "link in",
-        "z": "be23931a122611c2",
-        "name": "MQTT - UI [in]",
-        "links": [
-            "06b9c85a8a8f2c89"
-        ],
-        "x": 135,
-        "y": 420,
-        "wires": [
-            [
-                "9e2a19f8bb658467"
-            ]
-        ]
-    },
-    {
-        "id": "9e2a19f8bb658467",
-        "type": "function",
-        "z": "be23931a122611c2",
-        "name": "Parseo MSG a variables",
-        "func": "// Define los rangos para cada valor\nreturn msg.payload;\n\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 390,
-        "y": 420,
-        "wires": [
-            [
-                "65374416bc7d65ac",
-                "099d7f66397cafdc"
-            ]
-        ]
-    },
-    {
-        "id": "65374416bc7d65ac",
-        "type": "debug",
-        "z": "be23931a122611c2",
-        "name": "Datos Gráficas UI",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 670,
-        "y": 200,
-        "wires": []
-    },
-    {
-        "id": "3d67dd4163127623",
-        "type": "ui_gauge",
-        "z": "be23931a122611c2",
-        "name": "",
-        "group": "79841b8810581310",
-        "order": 2,
-        "width": 6,
-        "height": 6,
-        "gtype": "gage",
-        "title": "Humedad Entorno",
-        "label": "%",
-        "format": "{{environmentHumidity.value}}",
-        "min": "-20",
-        "max": "50",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 1170,
-        "y": 120,
-        "wires": []
-    },
-    {
-        "id": "2c01e1f38d75843c",
-        "type": "ui_gauge",
-        "z": "be23931a122611c2",
-        "name": "",
-        "group": "79841b8810581310",
-        "order": 3,
-        "width": 6,
-        "height": 6,
-        "gtype": "gage",
-        "title": "Gas O2 Entorno",
-        "label": "ppm",
-        "format": "{{environmentGasO2.value}}",
-        "min": "-20",
-        "max": "50",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 1160,
-        "y": 160,
-        "wires": []
-    },
-    {
-        "id": "66bb46d92cc76c3b",
-        "type": "ui_gauge",
-        "z": "be23931a122611c2",
-        "name": "",
-        "group": "79841b8810581310",
-        "order": 4,
-        "width": 6,
-        "height": 6,
-        "gtype": "gage",
-        "title": "Gas CO2 Entorno",
-        "label": "ppm",
-        "format": "{{environmentGasCO2.value}}",
-        "min": "-20",
-        "max": "50",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 1170,
-        "y": 200,
-        "wires": []
-    },
-    {
-        "id": "e1ae4c82c86b21d5",
-        "type": "ui_gauge",
-        "z": "be23931a122611c2",
-        "name": "",
-        "group": "79841b8810581310",
-        "order": 8,
-        "width": 6,
-        "height": 6,
-        "gtype": "gage",
-        "title": "Temperatura Biomasa",
-        "label": "ºC",
-        "format": "{{biomassTemperature.value}}",
-        "min": "-20",
-        "max": "50",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 1180,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "4b106befa232a4a6",
-        "type": "ui_gauge",
-        "z": "be23931a122611c2",
-        "name": "",
-        "group": "79841b8810581310",
-        "order": 9,
-        "width": 6,
-        "height": 6,
-        "gtype": "gage",
-        "title": "Peso Biomasa",
-        "label": "kg",
-        "format": "{{biomassWeight.value}}",
-        "min": "-20",
-        "max": "50",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 1160,
+        "x": 1440,
         "y": 280,
         "wires": []
     },
     {
-        "id": "66b32e34b6f6f225",
-        "type": "ui_gauge",
-        "z": "be23931a122611c2",
-        "name": "",
-        "group": "79841b8810581310",
-        "order": 6,
-        "width": 6,
-        "height": 6,
-        "gtype": "gage",
-        "title": "Cantidad de Fluido Biomasa",
-        "label": "litro",
-        "format": "{{biomassFluidAmount.value}}",
-        "min": "-20",
-        "max": "50",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 1200,
-        "y": 320,
-        "wires": []
-    },
-    {
-        "id": "e3c2484e1128fdbd",
-        "type": "ui_gauge",
-        "z": "be23931a122611c2",
-        "name": "",
-        "group": "79841b8810581310",
-        "order": 7,
-        "width": 6,
-        "height": 6,
-        "gtype": "gage",
-        "title": "Ph Biomasa",
-        "label": "pH ",
-        "format": "{{biomassPh.value}}",
-        "min": "-20",
-        "max": "50",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 1150,
-        "y": 360,
-        "wires": []
-    },
-    {
-        "id": "099d7f66397cafdc",
-        "type": "switch",
-        "z": "be23931a122611c2",
-        "name": "",
-        "property": "payload.id",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "001",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "002",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 770,
-        "y": 420,
-        "wires": [
-            [
-                "8ec0f7df838adcf0",
-                "3d67dd4163127623",
-                "2c01e1f38d75843c",
-                "66bb46d92cc76c3b",
-                "e1ae4c82c86b21d5",
-                "4b106befa232a4a6",
-                "66b32e34b6f6f225",
-                "e3c2484e1128fdbd"
-            ],
-            [
-                "52f3063625343723",
-                "0c208c30752c1222",
-                "9e4c8fe11e3482d8",
-                "b665567a4c54d18c",
-                "3685684911c81429",
-                "e58fa4ed37ed24c2",
-                "5766f23a2e92e44d",
-                "2e1998a05139daf0"
-            ]
-        ]
-    },
-    {
-        "id": "52f3063625343723",
-        "type": "ui_gauge",
-        "z": "be23931a122611c2",
-        "name": "",
-        "group": "5d6dcd2832255c4f",
-        "order": 1,
-        "width": 6,
-        "height": 6,
-        "gtype": "gage",
-        "title": "Temperatura Entorno",
-        "label": "ºC",
-        "format": "{{msg.environmentTemperature.value}}",
-        "min": "-20",
-        "max": "50",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 1180,
-        "y": 500,
-        "wires": []
-    },
-    {
-        "id": "0c208c30752c1222",
-        "type": "ui_gauge",
-        "z": "be23931a122611c2",
-        "name": "",
-        "group": "5d6dcd2832255c4f",
-        "order": 2,
-        "width": 6,
-        "height": 6,
-        "gtype": "gage",
-        "title": "Humedad Entorno",
-        "label": "%",
-        "format": "{{environmentHumidity.value}}",
-        "min": "-20",
-        "max": "50",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 1170,
-        "y": 540,
-        "wires": []
-    },
-    {
-        "id": "9e4c8fe11e3482d8",
-        "type": "ui_gauge",
-        "z": "be23931a122611c2",
-        "name": "",
-        "group": "5d6dcd2832255c4f",
-        "order": 3,
-        "width": 6,
-        "height": 6,
-        "gtype": "gage",
-        "title": "Gas O2 Entorno",
-        "label": "ppm",
-        "format": "{{environmentGasO2.value}}",
-        "min": "-20",
-        "max": "50",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 1160,
-        "y": 580,
-        "wires": []
-    },
-    {
-        "id": "b665567a4c54d18c",
-        "type": "ui_gauge",
-        "z": "be23931a122611c2",
-        "name": "",
-        "group": "5d6dcd2832255c4f",
-        "order": 4,
-        "width": 6,
-        "height": 6,
-        "gtype": "gage",
-        "title": "Gas CO2 Entorno",
-        "label": "ppm",
-        "format": "{{environmentGasCO2.value}}",
-        "min": "-20",
-        "max": "50",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 1170,
-        "y": 620,
-        "wires": []
-    },
-    {
-        "id": "3685684911c81429",
-        "type": "ui_gauge",
-        "z": "be23931a122611c2",
-        "name": "",
-        "group": "5d6dcd2832255c4f",
-        "order": 8,
-        "width": 6,
-        "height": 6,
-        "gtype": "gage",
-        "title": "Temperatura Biomasa",
-        "label": "ºC",
-        "format": "{{biomassTemperature.value}}",
-        "min": "-20",
-        "max": "50",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 1180,
-        "y": 660,
-        "wires": []
-    },
-    {
-        "id": "e58fa4ed37ed24c2",
-        "type": "ui_gauge",
-        "z": "be23931a122611c2",
-        "name": "",
-        "group": "5d6dcd2832255c4f",
-        "order": 9,
-        "width": 6,
-        "height": 6,
-        "gtype": "gage",
-        "title": "Peso Biomasa",
-        "label": "kg",
-        "format": "{{biomassWeight.value}}",
-        "min": "-20",
-        "max": "50",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 1160,
-        "y": 700,
-        "wires": []
-    },
-    {
-        "id": "5766f23a2e92e44d",
-        "type": "ui_gauge",
-        "z": "be23931a122611c2",
-        "name": "",
-        "group": "5d6dcd2832255c4f",
-        "order": 6,
-        "width": 6,
-        "height": 6,
-        "gtype": "gage",
-        "title": "Cantidad de Fluido Biomasa",
-        "label": "litro",
-        "format": "{{biomassFluidAmount.value}}",
-        "min": "-20",
-        "max": "50",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 1200,
-        "y": 740,
-        "wires": []
-    },
-    {
-        "id": "2e1998a05139daf0",
-        "type": "ui_gauge",
-        "z": "be23931a122611c2",
-        "name": "",
-        "group": "5d6dcd2832255c4f",
-        "order": 7,
-        "width": 6,
-        "height": 6,
-        "gtype": "gage",
-        "title": "Ph Biomasa",
-        "label": "pH ",
-        "format": "{{biomassPh.value}}",
-        "min": "-20",
-        "max": "50",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 1150,
-        "y": 780,
-        "wires": []
-    },
-    {
-        "id": "52767a15a7b08d03",
-        "type": "debug",
-        "z": "af5896ddd7b05240",
-        "name": "Fiware Data Response",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1580,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "0089688703cee780",
+        "id": "f0292dde4eaf7591",
         "type": "http request",
-        "z": "af5896ddd7b05240",
+        "z": "f8178ed7c460ebb3",
         "name": "",
         "method": "POST",
         "ret": "txt",
@@ -969,19 +40,19 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 1850,
-        "y": 380,
+        "x": 1890,
+        "y": 560,
         "wires": [
             [
-                "072a60a3be97ead8",
-                "64aaa92b92a04ac9"
+                "27ba77dacf266b91",
+                "97fe6fa93d02c98f"
             ]
         ]
     },
     {
-        "id": "0146b9aeb99d8ffe",
+        "id": "9e0d834fac3c8f75",
         "type": "function",
-        "z": "af5896ddd7b05240",
+        "z": "f8178ed7c460ebb3",
         "name": "Set Token Payload",
         "func": "\n// Headers\nmsg.headers = {\n    'Content-Type': 'application/json'  // Configura el Content-Type\n};\n\n// Payload\nmsg.payload = {\n    \"auth\": {\n        \"identity\": {\n            \"methods\": [\n                \"password\"\n            ],\n                \"password\": {\n                \"user\": {\n                    \"domain\": {\n                        \"name\": \"smartprovincia\"\n                    },\n                    \"name\": \"userCompostera\",\n                    \"password\": \"badajozesmas\"\n                }\n            }\n        },\n        \"scope\": {\n            \"project\": {\n                \"domain\": {\n                    \"name\": \"smartprovincia\"\n                },\n                \"name\": \"/Compostera\"\n            }\n        }\n    }\n};\n\n// MSG\nreturn msg;\n",
         "outputs": 1,
@@ -991,17 +62,17 @@
         "finalize": "",
         "libs": [],
         "x": 1650,
-        "y": 500,
+        "y": 560,
         "wires": [
             [
-                "0089688703cee780"
+                "f0292dde4eaf7591"
             ]
         ]
     },
     {
-        "id": "072a60a3be97ead8",
+        "id": "27ba77dacf266b91",
         "type": "function",
-        "z": "af5896ddd7b05240",
+        "z": "f8178ed7c460ebb3",
         "name": "Get Token from Response",
         "func": "// Extraer el token del encabezado de la respuesta\nvar token = msg.headers['x-subject-token'];\n\n// Almacenar el token en el contexto de flujo\nflow.set('auth_token', token);\n\n// Pasar el mensaje con el token en el payload\nreturn msg;",
         "outputs": 1,
@@ -1010,18 +81,18 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2070,
-        "y": 500,
+        "x": 2030,
+        "y": 680,
         "wires": [
             [
-                "bf86053ee6efa6a4"
+                "0da78d846fbfdd37"
             ]
         ]
     },
     {
-        "id": "bf86053ee6efa6a4",
+        "id": "0da78d846fbfdd37",
         "type": "debug",
-        "z": "af5896ddd7b05240",
+        "z": "f8178ed7c460ebb3",
         "name": "Fiware Auth Response",
         "active": false,
         "tosidebar": true,
@@ -1031,14 +102,14 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 2140,
-        "y": 600,
+        "x": 2300,
+        "y": 680,
         "wires": []
     },
     {
-        "id": "fdbef70a650a2d08",
+        "id": "eb7ff51d53d32719",
         "type": "http request",
-        "z": "af5896ddd7b05240",
+        "z": "f8178ed7c460ebb3",
         "name": "",
         "method": "POST",
         "ret": "txt",
@@ -1051,19 +122,19 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 1290,
-        "y": 240,
+        "x": 1210,
+        "y": 400,
         "wires": [
             [
-                "52767a15a7b08d03",
-                "fed881e59d4a1daa"
+                "06061d1402de7531",
+                "120e4564f6012989"
             ]
         ]
     },
     {
-        "id": "64aaa92b92a04ac9",
+        "id": "8c94fe085c947ab1",
         "type": "function",
-        "z": "af5896ddd7b05240",
+        "z": "f8178ed7c460ebb3",
         "name": "Set Entity Request Data",
         "func": "\n// Headers\nmsg.headers = {\n    'Content-Type': 'application/json',\n    'Fiware-Service': 'smartprovincia',\n    'Fiware-ServicePath': '/Compostera',\n    'X-Auth-Token': flow.get('auth_token'),\n\n};\n\n// Body/Payload\nmsg.payload = global.get('mqtt-payload');\n\n// URL\nconst composterId = global.get('composter-id')\nmsg.url = `https://cb.iotplatform.telefonica.com:10027/v2/entities/${composterId}/attrs`;\n\n// MSG\nreturn msg;\n",
         "outputs": 1,
@@ -1072,34 +143,35 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 990,
-        "y": 240,
+        "x": 910,
+        "y": 400,
         "wires": [
             [
-                "fdbef70a650a2d08"
+                "eb7ff51d53d32719"
             ]
         ]
     },
     {
-        "id": "d28aa9260cf8d1d7",
+        "id": "9ad2faa6b89aaf50",
         "type": "link in",
-        "z": "af5896ddd7b05240",
+        "z": "f8178ed7c460ebb3",
         "name": "Fiware - MQTT [in]",
         "links": [
-            "510a115d09c95376"
+            "98d4597723d894fe",
+            "97fe6fa93d02c98f"
         ],
-        "x": 685,
-        "y": 240,
+        "x": 695,
+        "y": 400,
         "wires": [
             [
-                "64aaa92b92a04ac9"
+                "8c94fe085c947ab1"
             ]
         ]
     },
     {
-        "id": "fed881e59d4a1daa",
+        "id": "120e4564f6012989",
         "type": "switch",
-        "z": "af5896ddd7b05240",
+        "z": "f8178ed7c460ebb3",
         "name": "Refrescar Token",
         "property": "statusCode",
         "propertyType": "msg",
@@ -1108,17 +180,38 @@
                 "t": "eq",
                 "v": "401",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "400",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 1,
-        "x": 1500,
-        "y": 360,
+        "outputs": 2,
+        "x": 1420,
+        "y": 500,
         "wires": [
             [
-                "0146b9aeb99d8ffe"
+                "9e0d834fac3c8f75"
+            ],
+            [
+                "9e0d834fac3c8f75"
             ]
         ]
+    },
+    {
+        "id": "97fe6fa93d02c98f",
+        "type": "link out",
+        "z": "f8178ed7c460ebb3",
+        "name": "Fiware - Fiware [Out]",
+        "mode": "link",
+        "links": [
+            "9ad2faa6b89aaf50"
+        ],
+        "x": 2075,
+        "y": 560,
+        "wires": []
     }
 ]
